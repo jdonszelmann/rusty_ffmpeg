@@ -37,6 +37,9 @@ pkg-config = "0.3"
 link_system_ffmpeg = []
 # Probe and link FFmpeg with vcpkg
 link_vcpkg_ffmpeg = ["vcpkg"]
+# Use the prebuilt FFmpeg 7 bindings from src/binding.rs instead of generating at build time
+# This ensures consistent API signatures across all platforms
+use_prebuilt_binding = []
 # FFmpeg 5.* support
 ffmpeg5 = []
 # FFmpeg 6.* support

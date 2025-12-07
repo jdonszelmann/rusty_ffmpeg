@@ -584,6 +584,15 @@ fn docs_rs_linking(env_vars: EnvVars) {
     use_prebuilt_binding(Path::new("src/binding.rs"), binding_file_path);
 }
 
+/// When use_prebuilt_binding feature is enabled, use the prebuilt binding
+/// from src/binding.rs. This is useful when the system FFmpeg version
+/// doesn't match the expected API (e.g., system has FFmpeg 6 but we need FFmpeg 7).
+#[cfg(feature = "use_prebuilt_binding")]
+fn use_prebuilt_binding_feature(env_vars: &EnvVars) {
+    let binding_file_path = &env_vars.out_dir.as_ref().unwrap().join("binding.rs");
+    use_prebuilt_binding(Path::new("src/binding.rs"), binding_file_path);
+}
+
 fn main() {
     let env_vars = EnvVars::init();
     if env_vars.docs_rs.is_some() {
@@ -594,4 +603,9 @@ fn main() {
         // fallback to normal linking
         linking(env_vars);
     }
+
+    // If use_prebuilt_binding feature is enabled, overwrite the generated binding
+    // with our prebuilt one to ensure consistent FFmpeg 7 API signatures
+    #[cfg(feature = "use_prebuilt_binding")]
+    use_prebuilt_binding_feature(&EnvVars::init());
 }
