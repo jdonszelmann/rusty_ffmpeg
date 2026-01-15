@@ -46,6 +46,12 @@ static HEADERS: Lazy<Vec<PathBuf>> = Lazy::new(|| {
         // "libavcodec/videotoolbox.h",
         "libavcodec/vorbis_parser.h",
         // "libavcodec/xvmc.h",
+
+        // Parsing hevc
+        "libavcodec/hevc/parse.h",
+        "libavcodec/hevc/ps.h",
+        "libavcodec/hevc/sei.h",
+        // other shit
         "libavdevice/avdevice.h",
         "libavdevice/version.h",
         "libavdevice/version_major.h",
